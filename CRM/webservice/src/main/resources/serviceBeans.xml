@@ -7,23 +7,28 @@
     <import resource="daoBeans.xml"/>
 
     <!-- Service-->
-    <bean id="userService" class="com.liuhy.service.impl.UserServiceImpl">
+   <!-- <bean id="userService" class="com.liuhy.service.impl.UserServiceImpl">
         <property name="userDao" ref="userDao"/>
-    </bean>
+    </bean>-->
 
     <!-- 首先配置事务管理器-->
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+
     <!-- 配置事务详情-->
     <tx:advice id="txAdvice" transaction-manager="txManager">
         <tx:attributes>
-            <tx:method name="addUser"/>
+            <tx:method name="add*"/>
+            <tx:method name="update*"/>
+            <tx:method name="delete*"/>
+            <tx:method name="find*"/>
         </tx:attributes>
     </tx:advice>
-    <!-- 为事务添加AOP-->
+
+    <!-- 为service添加事务，所有的事务只添加在service层-->
     <aop:config>
-        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.liuhy.service.impl.*.* (..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.liuhy.crm.*.service..*.* (..))"/>
     </aop:config>
 
 </beans>
