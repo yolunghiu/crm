@@ -8,6 +8,14 @@
     <constant name="struts.ui.theme" value="simple"/>
 
     <package name="common" namespace="/" extends="struts-default" strict-method-invocation="false">
+        <!--
+            action.class默认值：ActionSupport
+            action.method默认值：execute
+            result.name默认值
+        -->
+        <action name="uiAction_*_*">
+            <result>WEB-INF/pages/{1}/{2}.jsp</result>
+        </action>
     </package>
 
     <include file="struts-staff.xml"/>
