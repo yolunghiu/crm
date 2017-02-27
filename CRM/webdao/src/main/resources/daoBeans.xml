@@ -15,8 +15,8 @@
         <property name="password" value="${jdbc.password}"/>
     </bean>
 
-    <!-- Dao-->
-    <bean id="userDao" class="com.liuhy.dao.impl.UserDaoImpl">
+    <!-- 员工dao配置-->
+    <bean id="staffDao" class="com.liuhy.crm.staff.dao.impl.StaffDaoImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 </beans>

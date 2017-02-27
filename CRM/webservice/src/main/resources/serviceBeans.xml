@@ -4,12 +4,8 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+    <!-- 导入dao配置-->
     <import resource="daoBeans.xml"/>
-
-    <!-- Service-->
-   <!-- <bean id="userService" class="com.liuhy.service.impl.UserServiceImpl">
-        <property name="userDao" ref="userDao"/>
-    </bean>-->
 
     <!-- 首先配置事务管理器-->
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -22,7 +18,7 @@
             <tx:method name="add*"/>
             <tx:method name="update*"/>
             <tx:method name="delete*"/>
-            <tx:method name="find*"/>
+            <tx:method name="find*" read-only="true"/>
         </tx:attributes>
     </tx:advice>
 
@@ -30,5 +26,10 @@
     <aop:config>
         <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.liuhy.crm.*.service..*.* (..))"/>
     </aop:config>
+
+    <!-- 员工service配置-->
+    <bean id="staffService" class="com.liuhy.crm.staff.service.impl.StaffServiceImpl">
+        <property name="staffDao" ref="staffDao"/>
+    </bean>
 
 </beans>

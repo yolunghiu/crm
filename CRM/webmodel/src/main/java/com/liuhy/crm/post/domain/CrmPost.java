@@ -13,6 +13,7 @@ package com.liuhy.crm.post.domain;
 import com.liuhy.crm.department.domain.CrmDepartment;
 import com.liuhy.crm.staff.domain.CrmStaff;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class CrmPost {
@@ -21,7 +22,7 @@ public class CrmPost {
     private String depId;
 
     private CrmDepartment department;   // 一个职务对应一个部门
-    private Set<CrmStaff> staffSet;     // 一个职务对应多个员工
+    private Set<CrmStaff> staffSet = new HashSet<CrmStaff>(0);     // 一个职务对应多个员工
 
     public Set<CrmStaff> getStaffSet() {
         return staffSet;

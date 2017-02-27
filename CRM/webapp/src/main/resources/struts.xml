@@ -5,11 +5,10 @@
 <struts>
 
     <constant name="struts.devMode" value="true"/>
+    <constant name="struts.ui.theme" value="simple"/>
 
-    <package name="default" namespace="/" extends="struts-default" strict-method-invocation="false">
-        <action name="userAction_*" class="com.liuhy.action.UserAction" method="{1}">
-            <result name="success">/message.jsp</result>
-        </action>
+    <package name="common" namespace="/" extends="struts-default" strict-method-invocation="false">
     </package>
 
+    <include file="struts-staff.xml"/>
 </struts>

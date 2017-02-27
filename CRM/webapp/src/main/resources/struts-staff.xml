@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+
+    <package name="staff" namespace="/" extends="common" strict-method-invocation="false">
+        <action name="staffAction_*" class="com.liuhy.crm.staff.action.StaffAction" method="{1}">
+            <result name="login_success" type="redirectAction">staffAction_home</result>
+            <result name="login_fail">index.jsp</result>
+            <result name="home">WEB-INF/pages/frame.jsp</result>
+        </action>
+    </package>
+</struts>

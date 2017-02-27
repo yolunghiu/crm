@@ -12,6 +12,7 @@ package com.liuhy.crm.coursetype.domain;
 
 import com.liuhy.crm.classes.domain.CrmClasses;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class CrmCourseType {
@@ -21,7 +22,7 @@ public class CrmCourseType {
     private String courseName;
     private String remark;
 
-    private Set<CrmClasses> classSet;
+    private Set<CrmClasses> classSet = new HashSet<CrmClasses>();
 
     public Set<CrmClasses> getClassSet() {
         return classSet;
