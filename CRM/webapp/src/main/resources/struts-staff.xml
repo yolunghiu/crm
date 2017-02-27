@@ -7,7 +7,8 @@
     <package name="staff" namespace="/" extends="common" strict-method-invocation="false">
         <action name="staffAction_*" class="com.liuhy.crm.staff.action.StaffAction" method="{1}">
             <result name="login_success" type="redirectAction">staffAction_home</result>
-            <result name="login_fail">index.jsp</result>
+            <!-- 为了使用全局拦截器，将这个页面配置到了公共的包里-->
+            <!--<result name="login_fail">index.jsp</result>-->
             <result name="home">WEB-INF/pages/frame.jsp</result>
         </action>
     </package>

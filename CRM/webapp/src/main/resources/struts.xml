@@ -8,6 +8,47 @@
     <constant name="struts.ui.theme" value="simple"/>
 
     <package name="common" namespace="/" extends="struts-default" strict-method-invocation="false">
+        <!-- 拦截器配置
+			* 先声明
+			* 配置
+                方法1：每一个action单独使用,需要多次引用，否则默认将被覆盖
+                    <action name="">
+                        <interceptor-ref name="defaultStack"></interceptor-ref>
+                        <interceptor-ref name="loginInterceptor"></interceptor-ref>
+                    </action>
+                方法2：将多个拦截器打包生成自定义栈，action使用栈
+                    * 自定义拦截器栈
+                    <interceptor-stack name="loginStack">
+                        <interceptor-ref name="defaultStack"></interceptor-ref>
+                        <interceptor-ref name="loginInterceptor"></interceptor-ref>
+                    </interceptor-stack>
+                    * action引用
+                    <action name="">
+                        <interceptor-ref name="loginStack"></interceptor-ref>
+                    </action>
+                方法3：将自定义栈，把默认栈覆盖
+                    <default-interceptor-ref name="loginStack"></default-interceptor-ref>
+		-->
+
+        <interceptors>
+            <interceptor name="loginInterceptor" class="com.liuhy.crm.web.interceptor.LoginInterceptor">
+                <param name="excludeMethods">login</param>
+            </interceptor>
+            <!-- 自定义拦截器栈-->
+            <interceptor-stack name="loginStack">
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+                <interceptor-ref name="loginInterceptor"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+
+        <!-- 修改默认的拦截器栈-->
+        <default-interceptor-ref name="loginStack"/>
+
+        <global-results>
+            <!-- 如果拦截到用户没有登录，跳转到登录页面-->
+            <result name="login_fail">index.jsp</result>
+        </global-results>
+
         <!--
             action.class默认值：ActionSupport
             action.method默认值：execute

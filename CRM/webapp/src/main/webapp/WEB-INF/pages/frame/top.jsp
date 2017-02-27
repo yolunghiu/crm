@@ -31,7 +31,7 @@
 					<tr>
 						<td width="150" height="35"><p align="right">
 							<font color="#FFFFFF">欢迎您：
-								jack <b></b>
+								${sessionScope.loginStaff.loginName} <b></b>
 							</font>
 						</td>
 					</tr>
