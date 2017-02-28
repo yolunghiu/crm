@@ -19,7 +19,6 @@ import java.util.Set;
 public class CrmPost {
     private String postId;
     private String postName;
-    private String depId;
 
     private CrmDepartment department;   // 一个职务对应一个部门
     private Set<CrmStaff> staffSet = new HashSet<CrmStaff>(0);     // 一个职务对应多个员工
@@ -48,19 +47,21 @@ public class CrmPost {
         this.postName = postName;
     }
 
-    public String getDepId() {
-        return depId;
-    }
-
-    public void setDepId(String depId) {
-        this.depId = depId;
-    }
-
     public CrmDepartment getDepartment() {
         return department;
     }
 
     public void setDepartment(CrmDepartment department) {
         this.department = department;
+    }
+
+    @Override
+    public String toString() {
+        return "CrmPost{" +
+                "postId='" + postId + '\'' +
+                ", postName='" + postName + '\'' +
+                ", department=" + department +
+                ", staffSet=" + staffSet +
+                '}';
     }
 }

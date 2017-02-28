@@ -6,6 +6,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
+import java.util.List;
 import java.util.Map;
 
 public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> {
@@ -42,4 +43,13 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> 
     public String home() {
         return "home";
     }
+
+    public String listAll() {
+        List<CrmStaff> allStaff = staffService.findAll();
+        // TODO 目前数据已经可以从数据库拿到，要做的就是把数据展现到页面上
+        System.out.println(allStaff.size());
+        System.out.println(allStaff.get(0));
+        return "list_staff";
+    }
+
 }

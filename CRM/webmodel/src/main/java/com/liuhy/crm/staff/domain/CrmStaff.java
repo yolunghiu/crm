@@ -23,8 +23,18 @@ public class CrmStaff {
     private String loginPwd;
     private String gender;
     private Date onDutyDate;
+    private String staffName;
 
     private CrmPost post;   // 一个员工对应一个职务
+
+
+    public String getStaffName() {
+        return staffName;
+    }
+
+    public void setStaffName(String staffName) {
+        this.staffName = staffName;
+    }
 
     public String getStaffId() {
         return staffId;
@@ -72,5 +82,18 @@ public class CrmStaff {
 
     public void setPost(CrmPost post) {
         this.post = post;
+    }
+
+    @Override
+    public String toString() {
+        return "CrmStaff{" +
+                "staffId='" + staffId + '\'' +
+                ", loginName='" + loginName + '\'' +
+                ", loginPwd='" + loginPwd + '\'' +
+                ", gender='" + gender + '\'' +
+                ", onDutyDate=" + onDutyDate +
+                ", staffName='" + staffName + '\'' +
+                ", post=" + post +
+                '}';
     }
 }

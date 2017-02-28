@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
+
 /**
  * Created by liuhy on 2017/2/25.
  */
@@ -36,6 +38,13 @@ public class TestStaffDao {
 
         Assert.assertEquals(false, staffDao.isExists(falseStaff));
         Assert.assertEquals(true, staffDao.isExists(trueStaff));
+    }
+
+    @Test
+    public void testFindAll() {
+        List<CrmStaff> all = staffDao.findAll();
+
+        System.out.println(all.get(0));
     }
 
 

@@ -4,6 +4,8 @@ import com.liuhy.crm.staff.dao.StaffDao;
 import com.liuhy.crm.staff.domain.CrmStaff;
 import com.liuhy.crm.staff.service.StaffService;
 
+import java.util.List;
+
 public class StaffServiceImpl implements StaffService {
 
     private StaffDao staffDao;
@@ -42,6 +44,14 @@ public class StaffServiceImpl implements StaffService {
             return true;
         else
             return false;
+    }
+
+    /*
+    * 查询所有员工
+    * */
+    @Override
+    public List<CrmStaff> findAll() {
+        return staffDao.findAll();
     }
 
 }

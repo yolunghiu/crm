@@ -42,4 +42,13 @@ public class CrmDepartment {
     public void setDepId(String depId) {
         this.depId = depId;
     }
+
+    @Override
+    public String toString() {
+        return "CrmDepartment{" +
+                "depId='" + depId + '\'' +
+                ", depName='" + depName + '\'' +
+                ", postSet=" + postSet +
+                '}';
+    }
 }

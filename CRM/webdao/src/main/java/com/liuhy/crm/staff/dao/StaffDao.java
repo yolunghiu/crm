@@ -2,6 +2,8 @@ package com.liuhy.crm.staff.dao;
 
 import com.liuhy.crm.staff.domain.CrmStaff;
 
+import java.util.List;
+
 public interface StaffDao {
     boolean add(CrmStaff staff);
 
@@ -12,4 +14,6 @@ public interface StaffDao {
     CrmStaff findByName(String staffName);
 
     boolean isExists(CrmStaff staff);
+
+    List<CrmStaff> findAll();
 }

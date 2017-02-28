@@ -10,6 +10,8 @@
             <!-- 为了使用全局拦截器，将这个页面配置到了公共的包里-->
             <!--<result name="login_fail">index.jsp</result>-->
             <result name="home">WEB-INF/pages/frame.jsp</result>
+            <!-- 展示所有员工信息的页面-->
+            <result name="list_staff">WEB-INF/pages/staff/listStaff.jsp</result>
         </action>
     </package>
 </struts>

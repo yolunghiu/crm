@@ -18,5 +18,17 @@
     <!-- 员工dao配置-->
     <bean id="staffDao" class="com.liuhy.crm.staff.dao.impl.StaffDaoImpl">
         <property name="dataSource" ref="dataSource"/>
+        <property name="postDao" ref="postDao"/>
+    </bean>
+
+    <!-- 职位dao配置-->
+    <bean id="postDao" class="com.liuhy.crm.post.dao.impl.PostDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="departmentDao" ref="departmentDao"/>
+    </bean>
+
+    <!-- 部门dao配置-->
+    <bean id="departmentDao" class="com.liuhy.crm.department.dao.impl.DepartmentDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
     </bean>
 </beans>

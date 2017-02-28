@@ -2,6 +2,8 @@ package com.liuhy.crm.staff.service;
 
 import com.liuhy.crm.staff.domain.CrmStaff;
 
+import java.util.List;
+
 public interface StaffService {
     boolean addStaff(CrmStaff staff);
 
@@ -13,4 +15,5 @@ public interface StaffService {
 
     boolean login(CrmStaff staff);
 
+    List<CrmStaff> findAll();
 }
