@@ -47,8 +47,7 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> 
     public String listAll() {
         List<CrmStaff> allStaff = staffService.findAll();
         // TODO 目前数据已经可以从数据库拿到，要做的就是把数据展现到页面上
-        System.out.println(allStaff.size());
-        System.out.println(allStaff.get(0));
+        ActionContext.getContext().put("allStaff", allStaff);
         return "list_staff";
     }
 

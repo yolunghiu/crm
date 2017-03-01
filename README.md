@@ -101,3 +101,27 @@
 			</action>
 	</package>
 	```
+
+## Struts2在Action中将数据放入值栈的几种方法
+- 方式1：context (map)存放 put(key ,value) ，jsp页面获得 “#key” 。
+	`ActionContext.getContext().put(key, value)`
+- 方式2：root (值栈) ，push(obj) ，一般数据为JavaBean 或 Map ，jsp页面获得“属性名” 或“key”  。
+- 方式3：root (值栈) ，set(key ,value) ,一般数据为List ，jsp页面获得“key”
+	set() 底层 new Map(key,value) ，将 push(map )
+
+## 在jsp中从值栈取值
+	```
+	<s:iterator value="#allStaff" status="vs">
+			<tr class="<s:property value="#vs.even ? 'tabtd2' : 'tabtd1'"/>">
+					<td align="center"><s:property value="staffName"/></td>
+					<td align="center"><s:property value="gender"/></td>
+					<td align="center"><s:property value="onDutyDate"/></td>
+					<td align="center"><s:property value="post.department.depName"/></td>
+					<td align="center"><s:property value="post.postName"/></td>
+					<td width="7%" align="center">
+							<a href="${pageContext.request.contextPath}/pages/staff/editStaff.jsp"><img
+											src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/></a>
+					</td>
+			</tr>
+	</s:iterator>
+	```
