@@ -80,6 +80,15 @@
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-spring-plugin</artifactId>
         </dependency>
+        <!-- log4j-->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <finalName>web-app</finalName>

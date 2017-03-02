@@ -48,7 +48,6 @@ public class CrmDepartment {
         return "CrmDepartment{" +
                 "depId='" + depId + '\'' +
                 ", depName='" + depName + '\'' +
-                ", postSet=" + postSet +
                 '}';
     }
 }

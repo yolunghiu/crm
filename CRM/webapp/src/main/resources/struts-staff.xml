@@ -12,6 +12,8 @@
             <result name="home">WEB-INF/pages/frame.jsp</result>
             <!-- 展示所有员工信息的页面-->
             <result name="list_staff">WEB-INF/pages/staff/listStaff.jsp</result>
+            <!-- 修改员工信息页面-->
+            <result name="staff_edit">WEB-INF/pages/staff/editStaff.jsp</result>
         </action>
     </package>
 </struts>

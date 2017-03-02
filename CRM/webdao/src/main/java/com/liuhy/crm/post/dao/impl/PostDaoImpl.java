@@ -5,6 +5,8 @@ import com.liuhy.crm.post.dao.PostDao;
 import com.liuhy.crm.post.domain.CrmPost;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
+import java.util.*;
+
 public class PostDaoImpl extends JdbcDaoSupport implements PostDao {
 
     DepartmentDao departmentDao;
@@ -47,4 +49,27 @@ public class PostDaoImpl extends JdbcDaoSupport implements PostDao {
                         },
                         id);
     }
+
+    /*
+    * 这个方法查出来的CrmPost对象不级联查询它的Department对象
+    * 因为是根据depId查询所有的CrmPost，所以查出来也没什么用
+    * */
+    @Override
+    public Set<CrmPost> findByDepId(String depId) {
+        Set<CrmPost> postSet = new HashSet<CrmPost>(0);
+        List<Map<String, Object>> result = this.getJdbcTemplate().queryForList("SELECT * FROM crm_post WHERE depId=?", depId);
+
+        for (Iterator iterator = result.iterator(); iterator.hasNext(); ) {
+            Map<String, Object> row = (Map<String, Object>) iterator.next();
+
+            CrmPost post = new CrmPost();
+            post.setPostName((String) row.get("postName"));
+            post.setPostId((String) row.get("postId"));
+
+            postSet.add(post);
+        }
+
+        return postSet;
+    }
+
 }

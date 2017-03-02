@@ -30,5 +30,6 @@
     <!-- 部门dao配置-->
     <bean id="departmentDao" class="com.liuhy.crm.department.dao.impl.DepartmentDaoImpl">
         <property name="dataSource" ref="dataSource"/>
+        <property name="postDao" ref="postDao"/>
     </bean>
 </beans>

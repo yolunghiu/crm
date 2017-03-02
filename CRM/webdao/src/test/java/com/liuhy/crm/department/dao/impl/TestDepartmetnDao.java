@@ -22,4 +22,10 @@ public class TestDepartmetnDao {
     public void testFindById() {
         System.out.println(departmentDao.findById("2c9091c14c78e58b014c78e67de10001"));
     }
+
+    @Test
+    public void testFindAll() {
+        System.out.println(departmentDao.findAll(true));
+    }
+
 }

@@ -91,4 +91,27 @@ public class StaffDaoImpl extends JdbcDaoSupport implements StaffDao {
 
         return allStaff;
     }
+
+    @Override
+    public CrmStaff findById(String id) {
+        return this.getJdbcTemplate()
+                .queryForObject("SELECT * FROM crm_staff WHERE staffId=?",
+                        (rs, rowNum) -> {
+                            CrmStaff staff = new CrmStaff();
+                            staff.setStaffId(rs.getString("staffId"));
+                            staff.setLoginName(rs.getString("loginName"));
+                            staff.setLoginPwd(rs.getString("loginPwd"));
+                            staff.setGender(rs.getString("gender"));
+                            staff.setStaffName(rs.getString("staffName"));
+
+                            Date date = new Date(rs.getDate("onDutyDate").getTime());
+                            staff.setOnDutyDate(date);
+
+                            String postId = rs.getString("postId");
+                            staff.setPost(postDao.findById(postId));
+
+                            return staff;
+                        },
+                        id);
+    }
 }

@@ -27,9 +27,14 @@
         <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.liuhy.crm.*.service..*.* (..))"/>
     </aop:config>
 
-    <!-- 员工service配置-->
+    <!-- staffService配置-->
     <bean id="staffService" class="com.liuhy.crm.staff.service.impl.StaffServiceImpl">
         <property name="staffDao" ref="staffDao"/>
+    </bean>
+
+    <!-- departmentService配置-->
+    <bean id="departmentService" class="com.liuhy.crm.department.service.impl.DepartmentServiceImpl">
+        <property name="departmentDao" ref="departmentDao"/>
     </bean>
 
 </beans>

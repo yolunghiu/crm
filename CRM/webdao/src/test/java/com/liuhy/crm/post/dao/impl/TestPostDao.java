@@ -26,4 +26,9 @@ public class TestPostDao {
         CrmPost post = postDao.findById("2c9091c14c78e58b014c78e6d4510004");
         System.out.println(post);
     }
+
+    @Test
+    public void testFindByDepId() {
+        System.out.println(postDao.findByDepId("2c9091c14c78e58b014c78e67de10001"));
+    }
 }

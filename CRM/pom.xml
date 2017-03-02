@@ -131,6 +131,17 @@
                 <artifactId>struts2-spring-plugin</artifactId>
                 <version>${struts2.version}</version>
             </dependency>
+            <!-- log-->
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.17</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>2.6.2</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

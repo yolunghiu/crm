@@ -54,4 +54,9 @@ public class StaffServiceImpl implements StaffService {
         return staffDao.findAll();
     }
 
+    @Override
+    public CrmStaff findStaffById(String id) {
+        return staffDao.findById(id);
+    }
+
 }

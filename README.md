@@ -125,3 +125,41 @@
 			</tr>
 	</s:iterator>
 	```
+
+## 将数据压入值栈，在jsp中同名位置自动赋值
+
+- Action
+	```
+	public String editUI() {
+        CrmStaff editingStaff = staffService.findStaffById(staff.getStaffId());
+        ActionContext.getContext().getValueStack().push(editingStaff);
+        return "staff_edit";
+  }
+	```
+- jsp
+	```
+	<td>登录名：</td>
+  <td><s:textfield name="loginName"/></td>
+	```
+- 时间的处理
+	```
+	<s:date name="onDutyDate" var="dutyDate" format="yyyy-MM-dd"/>
+  <s:textfield name="dutyDate" readonly="true" onfocus="c.showMoreDay=true; c.show(this);"/>
+	```
+- radio的处理
+	```
+	<td>
+			<s:radio list="{'男', '女'}" name="gender"/>
+	</td>
+	```
+- password的处理
+	```
+	<td><s:password name="loginPwd" showPassword="true"/></td>
+	```
+- <s:select />
+	```
+	<s:select list="departments"
+      listValue="depName" listKey="depId"
+      headerKey="" headerValue="请选择"
+      name="post.department.depId"/>
+	```

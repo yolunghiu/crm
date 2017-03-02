@@ -16,4 +16,6 @@ public interface StaffService {
     boolean login(CrmStaff staff);
 
     List<CrmStaff> findAll();
+
+    CrmStaff findStaffById(String id);
 }

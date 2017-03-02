@@ -1,5 +1,7 @@
 package com.liuhy.crm.staff.action;
 
+import com.liuhy.crm.department.domain.CrmDepartment;
+import com.liuhy.crm.department.service.DepartmentService;
 import com.liuhy.crm.staff.domain.CrmStaff;
 import com.liuhy.crm.staff.service.StaffService;
 import com.opensymphony.xwork2.ActionContext;
@@ -18,9 +20,14 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> 
     }
 
     private StaffService staffService;
+    private DepartmentService departmentService;
 
     public void setStaffService(StaffService staffService) {
         this.staffService = staffService;
+    }
+
+    public void setDepartmentService(DepartmentService departmentService) {
+        this.departmentService = departmentService;
     }
 
     public String login() {
@@ -46,9 +53,17 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> 
 
     public String listAll() {
         List<CrmStaff> allStaff = staffService.findAll();
-        // TODO 目前数据已经可以从数据库拿到，要做的就是把数据展现到页面上
         ActionContext.getContext().put("allStaff", allStaff);
         return "list_staff";
+    }
+
+    public String editUI() {
+        CrmStaff editingStaff = staffService.findStaffById(staff.getStaffId());
+        ActionContext.getContext().getValueStack().push(editingStaff);
+        //TODO 查询所有部门，压入值栈，然后在jsp中展示
+        List<CrmDepartment> departments = departmentService.findAll();
+        ActionContext.getContext().getValueStack().set("departments", departments);
+        return "staff_edit";
     }
 
 }

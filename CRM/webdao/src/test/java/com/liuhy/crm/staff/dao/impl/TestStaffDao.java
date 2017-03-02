@@ -47,5 +47,9 @@ public class TestStaffDao {
         System.out.println(all.get(0));
     }
 
+    @Test
+    public void testFindById() {
+        System.out.println(staffDao.findById("1"));
+    }
 
 }

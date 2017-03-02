@@ -16,4 +16,6 @@ public interface StaffDao {
     boolean isExists(CrmStaff staff);
 
     List<CrmStaff> findAll();
+
+    CrmStaff findById(String id);
 }
