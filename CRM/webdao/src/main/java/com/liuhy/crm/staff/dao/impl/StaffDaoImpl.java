@@ -27,7 +27,10 @@ public class StaffDaoImpl extends JdbcDaoSupport implements StaffDao {
 
     @Override
     public boolean update(CrmStaff staff) {
-        return false;
+        this.getJdbcTemplate().update("UPDATE crm_staff SET loginName=?,staffName=?,gender=?,onDutyDate=?,postId=? WHERE staffId=?",
+                staff.getLoginName(), staff.getStaffName(), staff.getGender(), staff.getOnDutyDate(), staff.getPost().getPostId(), staff.getStaffId());
+
+        return true;
     }
 
     @Override

@@ -65,4 +65,13 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> 
         return "staff_edit";
     }
 
+    /*
+    * 保存更改的员工信息（更新）
+    * */
+    public String saveEdit() {
+        System.out.println(staff);
+        staffService.updateStaff(staff);
+        return "edit_success";
+    }
+
 }

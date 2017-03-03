@@ -43,7 +43,7 @@
             <td>登录名：</td>
             <td><s:textfield name="loginName"/></td>
             <td>密码：</td>
-            <td><s:password name="loginPwd" showPassword="true"/></td>
+            <td><s:password name="loginPwd" showPassword="true" disabled="true"/></td>
         </tr>
         <tr>
             <td>姓名：</td>
@@ -58,21 +58,20 @@
             <td width="20%">
                 <s:select list="departments"
                           listValue="depName" listKey="depId"
-                          headerKey="" headerValue="请选择"
                           name="post.department.depId"
                           onchange="getPostSet(this)"/>
             </td>
             <td width="8%">职务：</td>
             <td width="62%">
                 <s:select list="post.department.postSet" listKey="postId" listValue="postName" name="post.postId"
-                          headerKey="" headerValue="请选择" id="postSelect"/>
+                          id="postSelect"/>
             </td>
         </tr>
         <tr>
             <td width="10%">入职时间：</td>
             <td width="20%">
-                <s:date name="onDutyDate" var="dutyDate" format="yyyy-MM-dd"/>
-                <s:textfield name="dutyDate" readonly="true" onfocus="c.showMoreDay=true; c.show(this);"/>
+                <s:date name="onDutyDate" var="onDutyDate" format="yyyy-MM-dd"/>
+                <s:textfield name="onDutyDate" readonly="true" onfocus="c.showMoreDay=true; c.show(this);"/>
             </td>
             <td width="8%"></td>
             <td width="62%"></td>
@@ -114,7 +113,7 @@
                     var jsonData = eval("(" + textData + ")");
 
                     // 向postSelect中填数据
-                    for (var i = postSelect.options.length - 1; i >= 1; i--) {
+                    for (var i = postSelect.options.length - 1; i >= 0; i--) {
                         postSelect.remove(i);
                     }
                     for (var i = 0; i < jsonData.length; i++) {

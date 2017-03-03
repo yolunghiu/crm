@@ -21,7 +21,8 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public boolean updateStaff(CrmStaff staff) {
-        return false;
+        staffDao.update(staff);
+        return true;
     }
 
     @Override

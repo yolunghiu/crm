@@ -280,3 +280,12 @@
         return "none";
     }
 	```
+
+## struts2配置result的另一种方式
+	```
+	<result name="edit_success" type="redirectAction">
+      <!-- 这是注入重定向属性的另一种方式，底层都是有个属性，调用setter来实现的-->
+      <param name="namespace">/</param>
+      <param name="actionName">staffAction_listAll</param>
+  </result>
+	```

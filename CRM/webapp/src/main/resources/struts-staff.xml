@@ -14,6 +14,12 @@
             <result name="list_staff">WEB-INF/pages/staff/listStaff.jsp</result>
             <!-- 修改员工信息页面-->
             <result name="staff_edit">WEB-INF/pages/staff/editStaff.jsp</result>
+            <!-- 修改员工信息成功页面-->
+            <result name="edit_success" type="redirectAction">
+                <!-- 这是注入重定向属性的另一种方式，底层都是有个属性，调用setter来实现的-->
+                <param name="namespace">/</param>
+                <param name="actionName">staffAction_listAll</param>
+            </result>
         </action>
     </package>
 </struts>
