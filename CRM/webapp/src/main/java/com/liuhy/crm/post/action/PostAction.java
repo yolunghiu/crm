@@ -55,7 +55,6 @@ public class PostAction extends ActionSupport implements ModelDriven<CrmPost> {
                 .create();
 
         String result = gson.toJson(postSet);
-        System.out.println(result);
 
         HttpServletResponse response = ServletActionContext.getResponse();
         response.setCharacterEncoding("utf-8");
