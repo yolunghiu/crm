@@ -60,7 +60,6 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> 
     public String editUI() {
         CrmStaff editingStaff = staffService.findStaffById(staff.getStaffId());
         ActionContext.getContext().getValueStack().push(editingStaff);
-        //TODO 查询所有部门，压入值栈，然后在jsp中展示
         List<CrmDepartment> departments = departmentService.findAll();
         ActionContext.getContext().getValueStack().set("departments", departments);
         return "staff_edit";

@@ -16,6 +16,11 @@
             <artifactId>web-service</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!-- servlet api-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
         <!-- 单元测试-->
         <dependency>
             <groupId>junit</groupId>
@@ -80,14 +85,10 @@
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-spring-plugin</artifactId>
         </dependency>
-        <!-- log4j-->
+        <!-- json google-json-->
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
         </dependency>
     </dependencies>
     <build>

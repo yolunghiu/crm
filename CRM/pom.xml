@@ -24,10 +24,19 @@
         <mysql-jdbc.version>5.1.40</mysql-jdbc.version>
         <hikaricp.version>2.6.0</hikaricp.version>
         <struts2.version>2.5.8</struts2.version>
+        <gson.version>2.8.0</gson.version>
+        <servlet.version>2.5</servlet.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- servlet api-->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>${servlet.version}</version>
+                <scope>provided</scope>
+            </dependency>
             <!-- 单元测试-->
             <dependency>
                 <groupId>junit</groupId>
@@ -131,16 +140,23 @@
                 <artifactId>struts2-spring-plugin</artifactId>
                 <version>${struts2.version}</version>
             </dependency>
-            <!-- log-->
-            <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>1.2.17</version>
-            </dependency>
+            <!--&lt;!&ndash; log&ndash;&gt;
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-core</artifactId>
-                <version>2.6.2</version>
+                <version>2.8</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>1.7.24</version>
+            </dependency>-->
+            <!-- json google-json-->
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${gson.version}</version>
+                <scope>compile</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

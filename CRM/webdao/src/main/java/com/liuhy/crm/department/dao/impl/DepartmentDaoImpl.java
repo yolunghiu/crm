@@ -32,6 +32,9 @@ public class DepartmentDaoImpl extends JdbcDaoSupport implements DepartmentDao {
         return false;
     }
 
+    /*
+    * 根据depId查出CrmDepartment
+    * */
     @Override
     public CrmDepartment findById(String id) {
         return this.getJdbcTemplate()

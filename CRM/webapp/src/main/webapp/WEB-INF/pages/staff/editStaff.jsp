@@ -59,17 +59,13 @@
                 <s:select list="departments"
                           listValue="depName" listKey="depId"
                           headerKey="" headerValue="请选择"
-                          name="post.department.depId"/>
+                          name="post.department.depId"
+                          onchange="getPostSet(this)"/>
             </td>
             <td width="8%">职务：</td>
             <td width="62%">
-                <%--<select name="crmPost.postId" id="postSelectId">
-                    <option value="">----请--选--择----</option>
-                    <option value="2c9091c14c78e58b014c78e6b34a0003">总监</option>
-                    <option value="2c9091c14c78e58b014c78e6d4510004" selected="selected">讲师</option>
-                </select>--%>
                 <s:select list="post.department.postSet" listKey="postId" listValue="postName" name="post.postId"
-                          headerKey="" headerValue="请选择"/>
+                          headerKey="" headerValue="请选择" id="postSelect"/>
             </td>
         </tr>
         <tr>
@@ -83,5 +79,55 @@
         </tr>
     </table>
 </s:form>
+<script>
+    var postSelect = document.getElementById("postSelect");
+
+    function getPostSet(obj) {
+        var xhr = null;
+
+        // 第一步：首先创建xhr对象
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        } else {
+            xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        if (null != xhr) {
+            var url = "${pageContext.request.contextPath}/postAction_findAllByDepartment?department.depId=" + obj.value;
+
+            // 第二步：准备发送请求-配置发送请求的一些行为
+            xhr.open("GET", url, true);
+
+            // 第三步：指定一些回调函数
+            xhr.onreadystatechange = ajaxCallback;
+
+            // 第四步：执行发送的动作(null是为了兼容低版本浏览器)
+            // get方式直接附加数据在上面的url中，post方式加在参数里
+            xhr.send();
+        }
+
+        function ajaxCallback() {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    var textData = xhr.responseText;
+                    // 将字符串手动转换成json对象
+                    var jsonData = eval("(" + textData + ")");
+
+                    // 向postSelect中填数据
+                    for (var i = postSelect.options.length - 1; i >= 1; i--) {
+                        postSelect.remove(i);
+                    }
+                    for (var i = 0; i < jsonData.length; i++) {
+                        var postId = jsonData[i].postId;
+                        var postName = jsonData[i].postName;
+
+                        var item = new Option(postName,postId);
+                        postSelect.options.add(item);
+                    }
+                }
+            }
+        }
+    }
+</script>
 </body>
 </html>

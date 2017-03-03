@@ -1,6 +1,7 @@
 package com.liuhy.crm.post.dao.impl;
 
 import com.liuhy.crm.department.dao.DepartmentDao;
+import com.liuhy.crm.department.domain.CrmDepartment;
 import com.liuhy.crm.post.dao.PostDao;
 import com.liuhy.crm.post.domain.CrmPost;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
@@ -35,6 +36,9 @@ public class PostDaoImpl extends JdbcDaoSupport implements PostDao {
         return null;
     }
 
+    /*
+    * 根据postId查询CrmPost
+    * */
     @Override
     public CrmPost findById(String id) {
         return this.getJdbcTemplate()
@@ -51,8 +55,10 @@ public class PostDaoImpl extends JdbcDaoSupport implements PostDao {
     }
 
     /*
-    * 这个方法查出来的CrmPost对象不级联查询它的Department对象
-    * 因为是根据depId查询所有的CrmPost，所以查出来也没什么用
+    * 根据depId查出所有的CrmPost，每个对象的department属性不是查出来的，而是new出来的
+    * 只是把depId赋给了这个对象
+    *
+    * 这么做是为了防止递归查询
     * */
     @Override
     public Set<CrmPost> findByDepId(String depId) {
@@ -65,6 +71,11 @@ public class PostDaoImpl extends JdbcDaoSupport implements PostDao {
             CrmPost post = new CrmPost();
             post.setPostName((String) row.get("postName"));
             post.setPostId((String) row.get("postId"));
+
+            CrmDepartment department = new CrmDepartment();
+            department.setDepId(depId);
+            post.setDepartment(department);
+            // post.setDepartment(departmentDao.findById(depId));
 
             postSet.add(post);
         }

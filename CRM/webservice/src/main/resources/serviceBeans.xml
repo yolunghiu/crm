@@ -37,4 +37,9 @@
         <property name="departmentDao" ref="departmentDao"/>
     </bean>
 
+    <!-- postService配置-->
+    <bean id="postService" class="com.liuhy.crm.post.service.impl.PostServiceImpl">
+        <property name="postDao" ref="postDao"/>
+    </bean>
+
 </beans>
