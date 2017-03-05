@@ -7,6 +7,7 @@
 	- [在jsp中从值栈取值](#在jsp中从值栈取值)
 	- [将数据压入值栈，在jsp中同名位置自动赋值](#将数据压入值栈在jsp中同名位置自动赋值)
 	- [ajax实现部门和职务下拉选框的二级联动](#ajax实现部门和职务下拉选框的二级联动)
+	- [struts2配置result的另一种方式](#struts2配置result的另一种方式)
 
 <!-- /TOC -->
 
@@ -288,4 +289,83 @@
       <param name="namespace">/</param>
       <param name="actionName">staffAction_listAll</param>
   </result>
+	```
+
+## 条件查询
+
+- 将VO类融合到JavaBean中
+	```
+    /*
+    * 下面的几个属性不持久化到数据库，而是在listCourse.jsp进行高级检索时传来的条件
+    * 相当于将VO类融合到了这里
+    * */
+    private String totalMin;
+    private String totalMax;
+    private String costMin;
+    private String costMax;
+	```
+- 在Service中拼接查询字符串
+	```
+	@Override
+    public List<CrmCourseType> findAll(CrmCourseType courseType) {
+        // 查询条件
+        String constraints = "";
+        // 参数
+        List<Object> params = new ArrayList<Object>();
+
+        StringBuilder builder = new StringBuilder();
+        // 判断课程名是否为空
+        if (!StringUtils.isBlank(courseType.getCourseName())) {
+            builder.append(" and courseName like ? ");
+            params.add("%" + courseType.getCourseName() + "%");
+        }
+        // 判断课程介绍是否为空
+        if (!StringUtils.isBlank(courseType.getRemark())) {
+            builder.append(" and remark like ? ");
+            params.add("%" + courseType.getRemark() + "%");
+        }
+        if (!StringUtils.isBlank(courseType.getTotalMin())) {
+            builder.append(" and total >= ? ");
+            params.add(courseType.getTotalMin());
+        }
+        if (!StringUtils.isBlank(courseType.getTotalMax())) {
+            builder.append(" and total <= ? ");
+            params.add(courseType.getTotalMax());
+        }
+        if (!StringUtils.isBlank(courseType.getCostMin())) {
+            builder.append(" and courseCost >= ? ");
+            params.add(courseType.getCostMin());
+        }
+        if (!StringUtils.isBlank(courseType.getCostMax())) {
+            builder.append(" and courseCost <= ? ");
+            params.add(courseType.getCostMax());
+        }
+
+        constraints = builder.toString();
+        Object[] args = params.toArray();
+        return courseTypeDao.findAll(constraints, args);
+    }
+	```
+- Dao查询
+	```
+	@Override
+	 public List<CrmCourseType> findAll(String constraints, Object... args) {
+			 List<CrmCourseType> courses = new ArrayList<CrmCourseType>(0);
+
+			 List result = this.getJdbcTemplate().queryForList("SELECT * FROM crm_course_type WHERE 1=1 " + constraints, args);
+			 for (int i = 0; i < result.size(); i++) {
+
+					 Map<String, Object> row = (Map<String, Object>) result.get(i);
+					 CrmCourseType course = new CrmCourseType();
+					 course.setCourseCost((Double) row.get("courseCost"));
+					 course.setCourseName((String) row.get("courseName"));
+					 course.setTotal((Integer) row.get("total"));
+					 course.setCourseTypeId((String) row.get("courseTypeId"));
+					 course.setRemark((String) row.get("remark"));
+
+					 courses.add(course);
+			 }
+
+			 return courses;
+	 }
 	```

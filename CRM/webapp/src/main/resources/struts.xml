@@ -61,4 +61,5 @@
 
     <include file="struts-staff.xml"/>
     <include file="struts-post.xml"/>
+    <include file="struts-coursetype.xml"/>
 </struts>

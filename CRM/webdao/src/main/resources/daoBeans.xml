@@ -32,4 +32,9 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="postDao" ref="postDao"/>
     </bean>
+
+    <!-- 课程类别dao配置-->
+    <bean id="courseTypeDao" class="com.liuhy.crm.coursetype.dao.impl.CourseTypeDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
 </beans>

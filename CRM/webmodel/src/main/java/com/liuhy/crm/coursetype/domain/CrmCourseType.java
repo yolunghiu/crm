@@ -10,11 +10,6 @@ package com.liuhy.crm.coursetype.domain;
     );
 * */
 
-import com.liuhy.crm.classes.domain.CrmClasses;
-
-import java.util.HashSet;
-import java.util.Set;
-
 public class CrmCourseType {
     private String courseTypeId;
     private double courseCost;
@@ -22,15 +17,14 @@ public class CrmCourseType {
     private String courseName;
     private String remark;
 
-    private Set<CrmClasses> classSet = new HashSet<CrmClasses>();
-
-    public Set<CrmClasses> getClassSet() {
-        return classSet;
-    }
-
-    public void setClassSet(Set<CrmClasses> classSet) {
-        this.classSet = classSet;
-    }
+    /*
+    * 下面的几个属性不持久化到数据库，而是在listCourse.jsp进行高级检索时传来的条件
+    * 相当于将VO类融合到了这里
+    * */
+    private String totalMin;
+    private String totalMax;
+    private String costMin;
+    private String costMax;
 
     public String getCourseTypeId() {
         return courseTypeId;
@@ -70,5 +64,37 @@ public class CrmCourseType {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getTotalMin() {
+        return totalMin;
+    }
+
+    public void setTotalMin(String totalMin) {
+        this.totalMin = totalMin;
+    }
+
+    public String getTotalMax() {
+        return totalMax;
+    }
+
+    public void setTotalMax(String totalMax) {
+        this.totalMax = totalMax;
+    }
+
+    public String getCostMin() {
+        return costMin;
+    }
+
+    public void setCostMin(String costMin) {
+        this.costMin = costMin;
+    }
+
+    public String getCostMax() {
+        return costMax;
+    }
+
+    public void setCostMax(String costMax) {
+        this.costMax = costMax;
     }
 }

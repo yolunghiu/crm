@@ -42,4 +42,9 @@
         <property name="postDao" ref="postDao"/>
     </bean>
 
+    <!-- courseTypeService配置-->
+    <bean id="courseTypeService" class="com.liuhy.crm.coursetype.service.impl.CourseTypeServiceImpl">
+        <property name="courseTypeDao" ref="courseTypeDao"/>
+    </bean>
+
 </beans>

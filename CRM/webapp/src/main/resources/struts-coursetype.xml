@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+
+    <package name="coursetype" namespace="/" extends="common" strict-method-invocation="false">
+        <action name="courseTypeAction_*" class="com.liuhy.crm.coursetype.action.CourseTypeAction" method="{1}">
+            <!-- 展示所有课程类别信息的页面-->
+            <result name="list_course">WEB-INF/pages/coursetype/listCourse.jsp</result>
+        </action>
+    </package>
+
+</struts>
