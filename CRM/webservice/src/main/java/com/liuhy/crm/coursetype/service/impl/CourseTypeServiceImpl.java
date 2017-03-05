@@ -60,4 +60,27 @@ public class CourseTypeServiceImpl implements CourseTypeService {
         Object[] args = params.toArray();
         return courseTypeDao.findAll(constraints, args);
     }
+
+    /*
+    * 根据Id查询课程
+    * */
+    @Override
+    public CrmCourseType findById(String courseTypeId) {
+        return courseTypeDao.findById(courseTypeId);
+    }
+
+    /*
+    * 添加或编辑course
+    * */
+    @Override
+    public boolean addOrEdit(CrmCourseType courseType) {
+        // 如果id是空的，说明是添加课程
+        if (StringUtils.isBlank(courseType.getCourseTypeId())) {
+            courseTypeDao.add(courseType);
+        } else {
+            courseTypeDao.update(courseType);
+        }
+
+        return true;
+    }
 }

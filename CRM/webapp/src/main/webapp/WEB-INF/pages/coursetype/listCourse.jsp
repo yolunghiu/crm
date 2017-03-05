@@ -28,9 +28,11 @@
                 <img src="${pageContext.request.contextPath}/images/button/gaojichaxun.gif"/>
             </a>
             <%--编辑前：添加类别 --%>
-            <a href="${pageContext.request.contextPath}/pages/coursetype/addOrEditCourse.jsp">
+            <s:a namespace="/" action="courseTypeAction_addOrEditUI">
                 <img src="${pageContext.request.contextPath}/images/button/tianjia.gif"/>
-            </a>
+            </s:a>
+            <%--<a href="${pageContext.request.contextPath}/courseTypeAction_addOrEditUI">
+            </a>--%>
         </td>
         <td width="3%" align="right"><img src="${pageContext.request.contextPath}/images/tright.gif"/></td>
     </tr>
@@ -38,7 +40,6 @@
 
 
 <%--条件查询 start --%>
-
 <s:form namespace="/" action="courseTypeAction_listAll">
     <table width="88%" border="0" class="emp_table" style="width:80%;">
         <tr>
@@ -67,7 +68,6 @@
         </tr>
     </table>
 </s:form>
-
 <%--条件查询 end --%>
 
 <table border="0" cellspacing="0" cellpadding="0" style="margin-top:5px;">
@@ -76,7 +76,6 @@
     </tr>
 </table>
 <table width="97%" border="1">
-
     <tr class="henglan" style="font-weight:bold;">
         <td width="14%" align="center">名称</td>
         <td width="33%" align="center">简介</td>
@@ -84,7 +83,6 @@
         <td width="18%" align="center">收费标准</td>
         <td width="11%" align="center">编辑</td>
     </tr>
-
     <s:iterator value="allCourses" status="vs">
         <tr class="<s:property value="#vs.even ? 'tabtd2' : 'tabtd1'"/>">
             <td align="center"><s:property value="courseName"/></td>
@@ -92,8 +90,10 @@
             <td align="center"><s:property value="total"/></td>
             <td align="center"><s:property value="courseCost"/></td>
             <td width="11%" align="center">
-                <a href="${pageContext.request.contextPath}/pages/coursetype/addOrEditCourse.jsp"><img
-                        src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/></a>
+                <s:a namespace="/" action="courseTypeAction_addOrEditUI">
+                    <s:param name="courseTypeId" value="courseTypeId"></s:param>
+                    <img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/>
+                </s:a>
             </td>
         </tr>
     </s:iterator>

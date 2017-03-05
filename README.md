@@ -1,6 +1,7 @@
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
 - [javaee crm](#javaee-crm)
+	- [Struts2标签的name和value属性](#struts2标签的name和value属性)
 	- [MD5加密](#md5加密)
 	- [Struts2拦截器](#struts2拦截器)
 	- [Struts2在Action中将数据放入值栈的几种方法](#struts2在action中将数据放入值栈的几种方法)
@@ -8,10 +9,18 @@
 	- [将数据压入值栈，在jsp中同名位置自动赋值](#将数据压入值栈在jsp中同名位置自动赋值)
 	- [ajax实现部门和职务下拉选框的二级联动](#ajax实现部门和职务下拉选框的二级联动)
 	- [struts2配置result的另一种方式](#struts2配置result的另一种方式)
+	- [条件查询](#条件查询)
 
 <!-- /TOC -->
 
 # javaee crm
+
+## Struts2标签的name和value属性
+
+1. `<s:property value="courseName"/>`
+这个标签只是要从值栈中取值，所以不需要 `name` 属性
+2. `<s:textfield name="courseCost" value="%{#course.courseCost}"/>`
+首先，这是一个表单中的标签，添加 `name` 属性既可以用于回显时自动从值栈栈顶取值，又可以用于提交表单时ModelDriven自动赋值；注意到这里的 `value` 中的值写法和上面不同，因为course对象是put到值栈中的，无法完成自动赋值
 
 ## MD5加密
 	```

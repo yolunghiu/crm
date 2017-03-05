@@ -8,6 +8,13 @@
         <action name="courseTypeAction_*" class="com.liuhy.crm.coursetype.action.CourseTypeAction" method="{1}">
             <!-- 展示所有课程类别信息的页面-->
             <result name="list_course">WEB-INF/pages/coursetype/listCourse.jsp</result>
+            <!-- 添加课程页面-->
+            <result name="addOrEdit_UI">WEB-INF/pages/coursetype/addOrEditCourse.jsp</result>
+            <!-- 添加或编辑课程成功-->
+            <result name="addOrEdit_success" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">courseTypeAction_listAll</param>
+            </result>
         </action>
     </package>
 
