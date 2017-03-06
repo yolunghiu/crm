@@ -10,6 +10,7 @@
 	- [ajax实现部门和职务下拉选框的二级联动](#ajax实现部门和职务下拉选框的二级联动)
 	- [struts2配置result的另一种方式](#struts2配置result的另一种方式)
 	- [条件查询](#条件查询)
+	- [分页](#分页)
 
 <!-- /TOC -->
 
@@ -377,4 +378,81 @@
 
 			 return courses;
 	 }
+	```
+
+## 分页
+
+1. 分页模型PageBean的封装
+	```
+	public class PageBean<T> {
+    /*
+    * currentPage and pageSize are passed by user
+    * */
+    private int currentPage;    // current page number
+    private int pageSize;    // size of each page
+
+    /*
+    * totalRecords is queried from db
+    * */
+    private int totalRecords;   // total records in db. i
+
+    /*
+    * calculate when this class is being constructed
+    * */
+    private int startIndex;     // the start index in database's records
+    private int totalPages;     // the total pages number of all records
+
+    private List<T> data = new ArrayList<T>(0);       // data queried from database
+
+    public PageBean(int currentPage, int pageSize, int totalRecords) {
+        this.currentPage = currentPage;
+        this.pageSize = pageSize;
+        this.totalRecords = totalRecords;
+
+        /*
+        * calculate these fields with the given params
+        * */
+        this.startIndex = (currentPage - 1) * pageSize;
+        this.totalPages = (pageSize - 1 + totalRecords) / pageSize;
+    }
+
+		// getter and setter...
+	}
+	```
+2. Dao实现
+
+	```
+		@Override
+  	public PageBean<CrmCourseType> findAll(int currentPage, int pageSize, String constraints, Object[] args) {
+      PageBean<CrmCourseType> pageBean = new PageBean<CrmCourseType>(currentPage, pageSize, DBUtils.getTotalRecrods("crm_course_type", this.getJdbcTemplate()));
+
+      // 拼接mysql分页语句
+      String limitSql = " LIMIT " + pageBean.getStartIndex() + "," + pageSize;
+
+      List result = this.getJdbcTemplate().queryForList("SELECT * FROM crm_course_type WHERE 1=1 " + constraints + limitSql, args);
+      for (int i = 0; i < result.size(); i++) {
+
+          Map<String, Object> row = (Map<String, Object>) result.get(i);
+          CrmCourseType course = new CrmCourseType();
+          course.setCourseCost((Double) row.get("courseCost"));
+          course.setCourseName((String) row.get("courseName"));
+          course.setTotal((Integer) row.get("total"));
+          course.setCourseTypeId((String) row.get("courseTypeId"));
+          course.setRemark((String) row.get("remark"));
+
+          pageBean.getData().add(course);
+      }
+
+      return pageBean;
+  	}
+	```
+3. jsp中分页关键代码
+	```
+	<script>
+	    function switchPage(num) {
+	        alert(num);
+	        document.getElementById("currentPage").value = num;
+	        document.forms[0].submit();
+	    }
+	</script>
 	```
