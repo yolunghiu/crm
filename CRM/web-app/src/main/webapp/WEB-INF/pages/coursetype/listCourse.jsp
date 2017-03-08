@@ -39,7 +39,7 @@
 
 <%--条件查询 start --%>
 <s:form namespace="/" action="courseTypeAction_listAll">
-    <s:hidden name="currentPage" value="#allCourses.currentPage" id="currentPage"></s:hidden>
+    <s:hidden name="currentPage" value="%{#allCourses.currentPage}" id="currentPage"></s:hidden>
     <table width="88%" border="0" class="emp_table" style="width:80%;">
         <tr>
             <td width="10%">课程类别：</td>
@@ -118,7 +118,6 @@
 </table>
 <script>
     function switchPage(num) {
-        alert(num);
         document.getElementById("currentPage").value = num;
         document.forms[0].submit();
     }

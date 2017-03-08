@@ -1,5 +1,6 @@
 package com.liuhy.crm.coursetype.action;
 
+import com.liuhy.crm.base.BaseAction;
 import com.liuhy.crm.coursetype.domain.CrmCourseType;
 import com.liuhy.crm.coursetype.service.CourseTypeService;
 import com.liuhy.crm.page.PageBean;
@@ -8,30 +9,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import org.apache.commons.lang3.StringUtils;
 
-public class CourseTypeAction extends ActionSupport implements ModelDriven<CrmCourseType> {
-
-    private CrmCourseType courseType = new CrmCourseType();
-    private CourseTypeService courseTypeService;
-
-    private int currentPage = 1;    // 当前页码，默认为1
-    private int pageSize = 2;
-
-    public void setCurrentPage(int currentPage) {
-        this.currentPage = currentPage;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public void setCourseTypeService(CourseTypeService courseTypeService) {
-        this.courseTypeService = courseTypeService;
-    }
-
-    @Override
-    public CrmCourseType getModel() {
-        return courseType;
-    }
+public class CourseTypeAction extends BaseAction<CrmCourseType> {
 
     /*
     * 查询所有课程类别
@@ -51,8 +29,8 @@ public class CourseTypeAction extends ActionSupport implements ModelDriven<CrmCo
         /*
         * 带分页的条件查询
         * */
-        PageBean<CrmCourseType> allCourses = courseTypeService.findAll(courseType, currentPage, pageSize);
-        ActionContext.getContext().put("allCourses", allCourses);
+        PageBean<CrmCourseType> allCourses = super.getCourseTypeService().findAll(this.getModel(), this.getCurrentPage(), this.getPageSize());
+        super.put("allCourses", allCourses);
 
         return "list_course";
     }
@@ -63,9 +41,9 @@ public class CourseTypeAction extends ActionSupport implements ModelDriven<CrmCo
     public String addOrEditUI() {
         // 如果请求中带了id，说明是要编辑课程，而不是添加课程
         // 这样的话需要把要编辑的课程压入值栈用于回显
-        if (!StringUtils.isBlank(courseType.getCourseTypeId())) {
-            CrmCourseType course = courseTypeService.findById(courseType.getCourseTypeId());
-            ActionContext.getContext().put("course", course);
+        if (!StringUtils.isBlank(this.getModel().getCourseTypeId())) {
+            CrmCourseType course = this.getCourseTypeService().findById(this.getModel().getCourseTypeId());
+            this.put("course", course);
         }
         return "addOrEdit_UI";
     }
@@ -74,7 +52,7 @@ public class CourseTypeAction extends ActionSupport implements ModelDriven<CrmCo
     * 添加或编辑课程
     * */
     public String addOrEdit() {
-        courseTypeService.addOrEdit(courseType);
+        this.getCourseTypeService().addOrEdit(this.getModel());
         return "addOrEdit_success";
     }
 }
