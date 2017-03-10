@@ -37,4 +37,10 @@
     <bean id="courseTypeDao" class="com.liuhy.crm.coursetype.dao.impl.CourseTypeDaoImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+
+    <!-- 课程dao配置-->
+    <bean id="classDao" class="com.liuhy.crm.classes.dao.impl.ClassDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="courseTypeDao" ref="courseTypeDao"/>
+    </bean>
 </beans>

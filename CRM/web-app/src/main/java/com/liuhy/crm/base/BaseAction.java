@@ -1,5 +1,6 @@
 package com.liuhy.crm.base;
 
+import com.liuhy.crm.classes.service.ClassService;
 import com.liuhy.crm.coursetype.service.CourseTypeService;
 import com.liuhy.crm.department.service.DepartmentService;
 import com.liuhy.crm.post.service.PostService;
@@ -45,6 +46,15 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
     private DepartmentService departmentService;
     private PostService postService;
     private CourseTypeService courseTypeService;
+    private ClassService classService;
+
+    public ClassService getClassService() {
+        return classService;
+    }
+
+    public void setClassService(ClassService classService) {
+        this.classService = classService;
+    }
 
     public StaffService getStaffService() {
         return staffService;

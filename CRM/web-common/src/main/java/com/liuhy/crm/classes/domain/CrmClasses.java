@@ -26,15 +26,14 @@ import java.util.Date;
 
 public class CrmClasses {
     private String classId;
-    private String courseTypeId;
     private String name;
     private Date beginTime;
     private Date endTime;
     private String status;
-    private int totalCount;
-    private int upgradeCount;
-    private int changeCount;
-    private int runoffCount;
+    private Integer totalCount;
+    private Integer upgradeCount;
+    private Integer changeCount;
+    private Integer runoffCount;
     private String remark;
     private Date uploadTime;
     private String uploadPath;
@@ -48,14 +47,6 @@ public class CrmClasses {
 
     public void setClassId(String classId) {
         this.classId = classId;
-    }
-
-    public String getCourseTypeId() {
-        return courseTypeId;
-    }
-
-    public void setCourseTypeId(String courseTypeId) {
-        this.courseTypeId = courseTypeId;
     }
 
     public String getName() {
@@ -90,35 +81,35 @@ public class CrmClasses {
         this.status = status;
     }
 
-    public int getTotalCount() {
+    public Integer getTotalCount() {
         return totalCount;
     }
 
-    public void setTotalCount(int totalCount) {
+    public void setTotalCount(Integer totalCount) {
         this.totalCount = totalCount;
     }
 
-    public int getUpgradeCount() {
+    public Integer getUpgradeCount() {
         return upgradeCount;
     }
 
-    public void setUpgradeCount(int upgradeCount) {
+    public void setUpgradeCount(Integer upgradeCount) {
         this.upgradeCount = upgradeCount;
     }
 
-    public int getChangeCount() {
+    public Integer getChangeCount() {
         return changeCount;
     }
 
-    public void setChangeCount(int changeCount) {
+    public void setChangeCount(Integer changeCount) {
         this.changeCount = changeCount;
     }
 
-    public int getRunoffCount() {
+    public Integer getRunoffCount() {
         return runoffCount;
     }
 
-    public void setRunoffCount(int runoffCount) {
+    public void setRunoffCount(Integer runoffCount) {
         this.runoffCount = runoffCount;
     }
 
@@ -160,5 +151,25 @@ public class CrmClasses {
 
     public void setCourseType(CrmCourseType courseType) {
         this.courseType = courseType;
+    }
+
+    @Override
+    public String toString() {
+        return "CrmClasses{" +
+                "classId='" + classId + '\'' +
+                ", name='" + name + '\'' +
+                ", beginTime=" + beginTime +
+                ", endTime=" + endTime +
+                ", status='" + status + '\'' +
+                ", totalCount=" + totalCount +
+                ", upgradeCount=" + upgradeCount +
+                ", changeCount=" + changeCount +
+                ", runoffCount=" + runoffCount +
+                ", remark='" + remark + '\'' +
+                ", uploadTime=" + uploadTime +
+                ", uploadPath='" + uploadPath + '\'' +
+                ", uploadFileName='" + uploadFileName + '\'' +
+                ", courseType=" + courseType +
+                '}';
     }
 }

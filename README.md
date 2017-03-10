@@ -518,3 +518,57 @@
         ActionContext.getContext().getSession().put(key, value);
     }
 	```
+
+## 文件上传
+1. jsp中的文件上传组件
+	```
+	<s:file name="schedule"/>
+	```
+2. Action中接收传来的文件
+	```
+	 // 要上传的文件
+	 private File schedule;
+	 // 文件名
+	 private String scheduleFileName;
+	 //文件类型
+	 private String scheduleContentType;
+
+	 public void setSchedule(File schedule) {
+			 this.schedule = schedule;
+	 }
+
+	 public void setScheduleFileName(String scheduleFileName) {
+			 this.scheduleFileName = scheduleFileName;
+	 }
+
+	 public void setScheduleContentType(String scheduleContentType) {
+			 this.scheduleContentType = scheduleContentType;
+	 }
+	```
+3. Action中保存文件
+	```
+		@InputConfig(resultName = "uploadInput")    // 当上传的文件类型错误时，返回这个结果
+	  public String upload() throws IOException {
+	      // 1.获取要保存文件的路径
+	      String path = ServletActionContext.getServletContext().getRealPath("WEB-INF/upload");
+	      // 2.生成文件名（uuid）
+	      String fileName = DBUtils.generateUUID();
+	      // 3.更新数据库
+	      CrmClasses crmClass = this.getModel();
+	      crmClass.setUploadTime(new Date());
+	      crmClass.setUploadFileName(scheduleFileName);
+	      crmClass.setUploadPath(path + "/" + fileName);
+
+	      this.getClassService().upload(crmClass);
+	      // 4.保存文件
+	      FileUtils.copyFile(schedule, new File(path + fileName));
+	      return "upload";
+	   }
+	```
+4. 配置上传文件类型
+	```
+		<interceptor-ref name="defaultStack">
+	      <!-- 限制上传文件的扩展名-->
+	      <param name="fileUpload.allowedExtensions">.xls,.xlsx</param>
+	  </interceptor-ref>
+	```

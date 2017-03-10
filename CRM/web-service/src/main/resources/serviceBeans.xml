@@ -47,4 +47,9 @@
         <property name="courseTypeDao" ref="courseTypeDao"/>
     </bean>
 
+    <!-- classService配置-->
+    <bean id="classService" class="com.liuhy.crm.classes.service.impl.ClassServiceImpl">
+        <property name="classDao" ref="classDao"/>
+    </bean>
+
 </beans>

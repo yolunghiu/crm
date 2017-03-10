@@ -36,7 +36,10 @@
             </interceptor>
             <!-- 自定义拦截器栈-->
             <interceptor-stack name="loginStack">
-                <interceptor-ref name="defaultStack"></interceptor-ref>
+                <interceptor-ref name="defaultStack">
+                    <!-- 限制上传文件的扩展名-->
+                    <param name="fileUpload.allowedExtensions">.xls,.xlsx</param>
+                </interceptor-ref>
                 <interceptor-ref name="loginInterceptor"></interceptor-ref>
             </interceptor-stack>
         </interceptors>
@@ -62,4 +65,5 @@
     <include file="struts-staff.xml"/>
     <include file="struts-post.xml"/>
     <include file="struts-coursetype.xml"/>
+    <include file="struts-classes.xml"/>
 </struts>

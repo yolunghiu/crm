@@ -4,14 +4,9 @@ import com.liuhy.crm.coursetype.dao.CourseTypeDao;
 import com.liuhy.crm.coursetype.domain.CrmCourseType;
 import com.liuhy.crm.page.PageBean;
 import com.liuhy.crm.utils.DBUtils;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
-import java.lang.annotation.Inherited;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -87,19 +82,16 @@ public class CourseTypeDaoImpl extends JdbcDaoSupport implements CourseTypeDao {
 
     @Override
     public CrmCourseType findById(String courseTypeId) {
-        return this.getJdbcTemplate().queryForObject("SELECT * FROM crm_course_type WHERE courseTypeId=?", new RowMapper<CrmCourseType>() {
-            @Override
-            public CrmCourseType mapRow(ResultSet rs, int rowNum) throws SQLException {
-                CrmCourseType course = new CrmCourseType();
+        return this.getJdbcTemplate().queryForObject("SELECT * FROM crm_course_type WHERE courseTypeId=?", (rs, rowNum) -> {
+            CrmCourseType course = new CrmCourseType();
 
-                course.setCourseTypeId(courseTypeId);
-                course.setRemark(rs.getString("remark"));
-                course.setCourseName(rs.getString("courseName"));
-                course.setTotal(rs.getInt("total"));
-                course.setCourseCost(rs.getDouble("courseCost"));
+            course.setCourseTypeId(courseTypeId);
+            course.setRemark(rs.getString("remark"));
+            course.setCourseName(rs.getString("courseName"));
+            course.setTotal(rs.getInt("total"));
+            course.setCourseCost(rs.getDouble("courseCost"));
 
-                return course;
-            }
+            return course;
         }, courseTypeId);
     }
 

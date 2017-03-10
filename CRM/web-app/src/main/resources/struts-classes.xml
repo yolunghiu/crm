@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+
+    <package name="classes" namespace="/" extends="common" strict-method-invocation="false">
+        <action name="classAction_*" class="com.liuhy.crm.classes.action.ClassAction" method="{1}">
+            <!-- 查询所有-->
+            <result name="list_all">WEB-INF/pages/classes/listClass.jsp</result>
+            <!-- 加载文件上传页面-->
+            <result name="upload_ui">WEB-INF/pages/classes/uploadClass.jsp</result>
+            <!-- 上传文件成功-->
+            <result name="upload" type="redirectAction">classAction_listAll</result>
+            <!-- 上传的文件格式不匹配-->
+            <result name="uploadInput">WEB-INF/pages/fail.jsp</result>
+        </action>
+    </package>
+
+</struts>
